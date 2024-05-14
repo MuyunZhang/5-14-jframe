@@ -12,6 +12,8 @@ public class WelcomePanel extends JPanel implements ActionListener {
     private JTextField textField;
     private JButton submitButton;
     private JButton clearButton;
+
+    private JButton original;
     private JFrame enclosingFrame;
     private BufferedImage goomba;
 
@@ -25,11 +27,14 @@ public class WelcomePanel extends JPanel implements ActionListener {
         textField = new JTextField(10);
         submitButton = new JButton("Submit");
         clearButton = new JButton("Clear");
+        original = new JButton("Original");
         add(textField);  // textField doesn't need a listener since nothing needs to happen when we type in text
         add(submitButton);
         add(clearButton);
+        add(original);
         submitButton.addActionListener(this);
         clearButton.addActionListener(this);
+        original.addActionListener(this);
     }
 
     @Override
@@ -40,8 +45,9 @@ public class WelcomePanel extends JPanel implements ActionListener {
         g.drawString("Please enter your name:", 50, 30);
         g.drawImage(goomba, 200, 50, null);
         textField.setLocation(50, 50);
-        submitButton.setLocation(50, 100);
-        clearButton.setLocation(150, 100);
+        submitButton.setLocation(20, 100);
+        original.setLocation(100, 100);
+        clearButton.setLocation(180, 100);
     }
 
     // ACTIONLISTENER INTERFACE METHODS
@@ -53,7 +59,12 @@ public class WelcomePanel extends JPanel implements ActionListener {
                 String playerName = textField.getText();
                 MainFrame f = new MainFrame(playerName);
                 enclosingFrame.setVisible(false);
-            } else {
+            } else if(buttonText.equals("Original")){
+                String playerName = "Mario";
+                MainFrame f = new MainFrame(playerName);
+                enclosingFrame.setVisible(false);
+            }
+            else{
                 textField.setText("");
             }
         }
